@@ -15,6 +15,7 @@ int relayPin = A6;
 
 // SparkCloud variable outputs
 char tempInfo[64];
+char pointInfo[64];
 char pwmInfo[64];
 
 // Temperature device on the D1 pin
@@ -38,6 +39,7 @@ void setup() {
     
     // SparkCloud: variables
     Spark.variable("temperature", &tempInfo, STRING);
+    Spark.variable("point", &pointInfo, STRING);
     Spark.variable("pwm", &pwmInfo, STRING);
     
     // SparkCloud: functions
@@ -77,7 +79,7 @@ void loop() {
     }
     
     // Actual temperature in celsius
-    actualTemperature = (double) ds18b20.getTemperature();
+    actualTemperature = ds18b20.getTemperature();
     
     // Calculate PID output
     myPID.Compute();
@@ -89,6 +91,7 @@ void loop() {
         // Convert values for output
         // convert pidOutput to 0-100
         sprintf(tempInfo, "%2.2f", actualTemperature);
+        sprintf(pointInfo, "%2.2f", pointTemperature);
         sprintf(pwmInfo, " %2.2f", (pidOutput / 255) * 100);
         
         // Log to the serial
@@ -114,7 +117,7 @@ int setPointTemperature(String pointTemperatureStr)
     char info[64];
     
     // Convert to double
-    pointTemperature = (double) atoi(pointTemperatureStr.c_str());
+    pointTemperature = atof(pointTemperatureStr.c_str());
     
     // Log to the serial
     sprintf(info, "Point is set to: %2.2f", pointTemperature);
