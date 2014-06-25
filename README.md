@@ -3,7 +3,6 @@ spark-core-pid-temperature
 
 Spark Core **PID** **temperature** controlling with **DS18B20**.
 
-    //TODO: set point temperature via spark cloud
 
 What is this?
 -------------
@@ -12,8 +11,22 @@ Doing this with a PID controller.
 
 ![http://www.podmerchant.com/newsletter/68-temperature-overshoot.jpg][3]
 
+SparkCloud endpoints
+--------------------
+
+ - /**temperature**
+ - /**point**
+ - /**pwm**
+
+SparkCloud events
+-----------------
+
+ - **tempInfo**
+ - **pwmInfo**
+
+ 
 Used libraries
--------------
+--------------
 
 **PID**
 [https://github.com/br3ttb/Arduino-PID-Library][1]
